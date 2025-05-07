@@ -107,7 +107,7 @@ public class ShipController : ControllerBase
         ) VALUES ("
         + shipToAdd.UserId +
         ", '" + shipToAdd.ShipName +
-        "', " + shipToAdd.MaxSpeed + ")";
+        "', " + shipToAdd.MaxSpeed.ToString(System.Globalization.CultureInfo.InvariantCulture) + ")";
 
         if (_dapper.ExecuteSql(sql))
         {

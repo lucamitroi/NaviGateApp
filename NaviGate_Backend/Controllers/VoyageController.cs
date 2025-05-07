@@ -69,8 +69,8 @@ public class VoyageController : ControllerBase
         int departurePortId = _controllerHelper.AddPort(voyageToAdd.VoyageDeparturePortName, voyageToAdd.VoyageDeparturePortCountry);
         int arrivalPortId = _controllerHelper.AddPort(voyageToAdd.VoyageArrivalPortName, voyageToAdd.VoyageArrivalPortCountry);
 
-        DateTime formatedVoyageStart = DateTime.ParseExact(voyageToAdd.VoyageStart.ToString(), "M/d/yyyy h:mm:ss tt", null);
-        DateTime formatedVoyageEnd = DateTime.ParseExact(voyageToAdd.VoyageEnd.ToString(), "M/d/yyyy h:mm:ss tt", null);
+        DateTime formatedVoyageStart = DateTime.ParseExact(voyageToAdd.VoyageStart, "yyyy-MM-ddTHH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        DateTime formatedVoyageEnd = DateTime.ParseExact(voyageToAdd.VoyageEnd, "yyyy-MM-ddTHH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
         string sql = @"
         INSERT INTO NaviGateSchema.Voyages (
@@ -102,8 +102,8 @@ public class VoyageController : ControllerBase
         int departurePortId = _controllerHelper.AddPort(voyageToEdit.VoyageDeparturePortName, voyageToEdit.VoyageDeparturePortCountry);
         int arrivalPortId = _controllerHelper.AddPort(voyageToEdit.VoyageArrivalPortName, voyageToEdit.VoyageArrivalPortCountry);
 
-        DateTime formatedVoyageStart = DateTime.ParseExact(voyageToEdit.VoyageStart.ToString(), "M/d/yyyy h:mm:ss tt", null);
-        DateTime formatedVoyageEnd = DateTime.ParseExact(voyageToEdit.VoyageEnd.ToString(), "M/d/yyyy h:mm:ss tt", null);
+        DateTime formatedVoyageStart = DateTime.ParseExact(voyageToEdit.VoyageStart, "yyyy-MM-ddTHH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        DateTime formatedVoyageEnd = DateTime.ParseExact(voyageToEdit.VoyageEnd, "yyyy-MM-ddTHH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
         string sql = @"
         UPDATE NaviGateSchema.Voyages 
