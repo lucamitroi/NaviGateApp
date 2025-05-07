@@ -6,7 +6,7 @@ NaviGateApp is a full-stack application built with ASP.NET on the backend and An
 
 This is the registration screen, where users create their accounts for the first time. Upon successful registration, users are redirected to a login screen with a similar interface to authenticate and access the application.
 
-![screenshot_1](https://github.com/user-attachments/assets/9bb7e875-4089-4485-97a0-5177e215f6ac)
+![screenshot_1](https://github.com/user-attachments/assets/be448afd-4c1e-447d-8db3-a128290eacee)
 ![screenshot_2](https://github.com/user-attachments/assets/c4ff4e11-980f-4ac7-bca9-f760faabaa41)
 
 These screenshots showcase the main interface of the application, populated with sample (dummy) data. On the left side, a list of all available ships is displayed, along with a button to add new ships. The center panel serves as the primary display area, presenting detailed information about the selected ship. This includes:
