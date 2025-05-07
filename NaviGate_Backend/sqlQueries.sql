@@ -32,7 +32,7 @@ CREATE TABLE NaviGateSchema.Ships (
     ShipId INT IDENTITY(1, 1),
     UserId INT,
     ShipName NVARCHAR(100),
-    MaxSpeed DECIMAL(7,3)
+    MaxSpeed DECIMAL(20,5)
 )
 GO
 
