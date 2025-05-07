@@ -1,0 +1,16 @@
+<header>
+    <app-navbar />
+</header>
+<body>
+    <div class="main-container" *ngIf="!isMobile">
+        <app-sidebar />
+        <div class="smaller-screen">
+            <app-display />
+        </div>
+    </div>
+
+    <div class="mobile-container" *ngIf="isMobile">
+        <app-sidebar *ngIf="menuBooleanSignal()"/>
+        <app-display *ngIf="!menuBooleanSignal()"/>
+    </div>
+</body>

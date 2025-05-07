@@ -1,0 +1,17 @@
+<div class="modal-backdrop" [class.visible]="isVisible">
+    <div *ngIf="isVisible" class="modal" @modalAnimation>
+      <h2>Delete the Ship</h2>
+      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" class="form-style" ngNativeValidate>
+        <div class="form-element">
+          <label for="voyageDeparturePortName">
+            <p>Are you sure you want to delete this ship?<p> 
+            <p>This will remove all the related voyages as well!<p>    
+          </label>
+        </div>
+        <div class="form-buttons">
+          <button type="button" *ngIf="!isLoading()" (click)="onClose()">No</button>
+          <button type="submit" [disabled]="isLoading()">{{!isLoading() ? 'Yes' : 'Loading...'}}</button>
+        </div>
+      </form>
+    </div>
+  </div>

@@ -1,0 +1,21 @@
+<header class="logo">
+    <img src="logo.png" />
+    <h3>NaviGate</h3>
+</header>
+<body>
+    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" class="form-style" ngNativeValidate>
+        <div class="form-element">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" ngModel required autocomplete="email">
+        </div>
+        <div class="form-element">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" ngModel required>
+        </div>
+        <div class="form-buttons">
+            <button type="button" *ngIf="!isLoading()" routerLink="/register">Go to Register</button>
+            <button type="submit" [disabled]="isLoading()">{{!isLoading() ? 'Confirm' : 'Loading...'}}</button>
+        </div>
+    </form>
+    <p *ngIf="errorMessage()" [@shakeAnimation] class="error">{{errorMessage()}}</p>
+</body>

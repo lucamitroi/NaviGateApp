@@ -1,0 +1,8 @@
+<section *ngIf="screenValueSignal() === 'no-ship'" class="display-nothing">
+    <div class="no-item-selected">
+        <img src="./ship2.png" [@fadeInFromBottom]/>
+        <h1 [@fadeInFromBottom]>No ship is selected</h1>
+    </div>
+</section>
+<app-ship-info *ngIf="screenValueSignal() != 'no-ship' && screenValueSignal() != 'add-ship'" class="display-something"/>
+<app-add-ship *ngIf="screenValueSignal() === 'add-ship'" class="display-something"/>

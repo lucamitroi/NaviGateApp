@@ -1,0 +1,23 @@
+# Build output folders
+bin/
+obj/
+
+# User-specific and temporary files
+.vs/
+.vscode/
+*.user
+*.suo
+*.cache
+
+# NuGet dependency files
+project.assets.json
+project.nuget.cache
+*.nuget.g.props
+*.nuget.g.targets
+
+# Debug and launch settings (optional)
+launchSettings.json
+
+# Logs, databases, and temp files
+*.log
+*.db

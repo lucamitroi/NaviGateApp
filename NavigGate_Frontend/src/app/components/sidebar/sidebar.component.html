@@ -1,0 +1,21 @@
+<section class="sidebar" @fadeInFromLeft>
+    <div class="first-row">
+        <h1>Your Ships:</h1>
+        <button (click)="handleAddShipClick()">Add a Ship +</button>
+    </div>
+    <div class="line">
+    </div>
+    <div *ngFor="let ship of storedShips()" class="ship-button">
+        <button (click)="handleShipSelection(ship.shipId)">
+            <div class="item-direction">
+                <div>
+                    <img src="./ship.png" />
+                </div>
+                <div>
+                    {{ ship.shipName }}
+                </div>
+            </div>
+        </button>
+    </div>
+</section>
+

@@ -1,0 +1,13 @@
+
+<ngx-charts-pie-chart *ngIf="storedShip()?.listOfVoyages!.length > 0; else noVoyages"
+  [view]="view"
+  [results]="chartData()"
+  [gradient]="gradient"
+  [legend]="showLegend"
+/>
+
+<ng-template #noVoyages>
+  <div class="placeholder-data">
+    <p>There is no data available</p>
+  </div>
+</ng-template>

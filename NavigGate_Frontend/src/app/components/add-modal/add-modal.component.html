@@ -1,0 +1,35 @@
+<div class="modal-backdrop" [class.visible]="isVisible">
+    <div *ngIf="isVisible" class="modal" @modalAnimation>
+      <h2>Add Voyage</h2>
+      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" class="form-style" ngNativeValidate>
+        <div class="form-element">
+          <label for="voyageDeparturePortName">Departure Port Name:</label>
+          <input id="voyageDeparturePortName" type="text" name="voyageDeparturePortName" ngModel required>
+        </div>
+        <div class="form-element">
+          <label for="voyageDeparturePortCountry">Departure Port Country:</label>
+          <input id="voyageDeparturePortCountry" type="text" name="voyageDeparturePortCountry" ngModel required>
+        </div>
+        <div class="form-element">
+          <label for="voyageArrivalPortName">Arrival Port Name:</label>
+          <input id="voyageArrivalPortName" type="text" name="voyageArrivalPortName" ngModel required>
+        </div>
+        <div class="form-element">
+          <label for="voyageArrivalPortCountry">Arrival Port Country:</label>
+          <input id="voyageArrivalPortCountry" type="text" name="voyageArrivalPortCountry" ngModel required>
+        </div>
+        <div class="form-element">
+          <label for="voyageStart">Departure Date:</label>
+          <input id="voyageStart" type="datetime-local" step="1" name="voyageStart" ngModel required>
+        </div>
+        <div class="form-element">
+          <label for="voyageEnd">Arrival Date:</label>
+          <input id="voyageEnd" type="datetime-local" step="1" name="voyageEnd" ngModel required>
+        </div>
+        <div class="form-buttons">
+          <button type="button" *ngIf="!isLoading()" (click)="onClose()">Close</button>
+          <button type="submit" [disabled]="isLoading()">{{!isLoading() ? 'Confirm' : 'Loading...'}}</button>
+        </div>
+      </form>
+    </div>
+  </div>

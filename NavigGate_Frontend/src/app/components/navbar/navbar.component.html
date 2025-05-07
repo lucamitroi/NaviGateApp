@@ -1,0 +1,19 @@
+<header>
+    <nav>
+        <div class="logo">
+            <span routerLink="/"><img src="./logo2.png"/></span>
+            <h1>NaviGate</h1>
+        </div>
+        <div class="nav-items">
+            <ul class="user-data">
+                <li><p>Hello, {{userName()}}!</p></li>
+                <li>
+                    <button id="menu-burger" (click)="handleMenuClick()">
+                        <img src="./menu-burger.png" />
+                    </button>
+                </li>
+                <li><button (click)="handleLogOut()" id="logout">Log Out</button></li>
+            </ul>
+        </div>
+    </nav>
+</header>

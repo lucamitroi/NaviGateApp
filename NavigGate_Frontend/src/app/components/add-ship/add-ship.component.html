@@ -1,0 +1,22 @@
+<div class="whole-form">
+    <header class="logo" [@fadeInFromBottom]>
+        <img src="ship2.png" />
+        <h1>Add a new Ship to your fleet:</h1>
+    </header>
+    <div class="form-body" [@fadeInFromBottom]>
+        <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" class="form-style" ngNativeValidate>
+            <div class="form-element">
+                <label for="shipName">What is the name of the ship?</label>
+                <input id="shipName" type="text" name="shipName" ngModel required>
+            </div>
+            <div class="form-element">
+                <label for="maxSpeed">What is the maximum speed of the ship? ( km/h )</label>
+                <input id="maxSpeed" type="number" step="any" name="maxSpeed" ngModel required>
+            </div>
+            <div class="form-buttons">
+                <button type="submit" [disabled]="isLoading()">{{!isLoading() ? 'Confirm' : 'Loading...'}}</button>
+            </div>
+        </form>
+        <p *ngIf="errorMessage()" [@shakeAnimation] class="error">{{errorMessage()}}</p>
+    </div>
+</div>

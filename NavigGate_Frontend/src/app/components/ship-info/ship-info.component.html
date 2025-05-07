@@ -1,0 +1,125 @@
+<div *ngIf="storedShip()" class="ship-info" [@fadeInFromBottom]>
+    <div class="{{ storedShip()?.listOfVoyages!.length > 0 ? 'information-body .init-list' : 'information-body' }}">
+      <div class="information-body-text">
+        <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" class="form-style" ngNativeValidate>
+          <label for="shipName">Name of the ship:</label>
+          <input id="shipName" type="text" name="shipName" [disabled]="editButton()" [(ngModel)]="shipNameMutable">
+          <label for="maxSpeed">Max. speed of the ship:</label>
+          <input id="maxSpeed" type="number" step="any" name="maxSpeed" [disabled]="editButton()" [(ngModel)]="shipSpeedMutable">
+          <div class="edit-ship-buttons">
+            <button *ngIf="editButton()" type="button" (click)="openDeleteShipModal()">Remove Ship</button>
+            <button *ngIf="editButton()" type="button" (click)="handleEditButton()">Edit Ship</button>
+          </div>
+          <div class="edit-ship-buttons">
+            <button *ngIf="!editButton()" type="button" (click)="handleEditButton()">Cancel</button>
+            <button *ngIf="!editButton()" type="submit" [disabled]="isLoading()">{{!isLoading() ? 'Confirm' : 'Loading...'}}</button>
+          </div>
+        </form>
+      </div>
+      <div class="information-body-graph">
+        <h1>Visual representation of the number of times each country was visited:</h1>
+        <app-visual-graph id="graphId" [shipId] = this.userIdSignal() />
+      </div>
+    </div>
+    <div class="line"></div>
+
+    <div class="voyages-body">
+      <div class="voyages-header {{showVoyages() ? 'expanded':''}}">
+        <h1>List of all the Voyages</h1>
+        <button (click)="handleHideVoyages()">
+          <span class="voyages-header-icon">&#9650;</span>
+        </button>
+      </div>
+      <div *ngIf="showVoyages()" @fadeInDetails>
+        <ng-container *ngIf="(storedShip()?.listOfVoyages ?? []).length > 0; else noVoyages">
+        <div *ngFor="let voyage of storedShip()?.listOfVoyages; let i = index">
+          <ul>
+            <li>Voyage {{ i + 1 }}:</li>
+            <p>Date: {{ formatDate(voyage.voyageDate) }}</p>
+            <p>Departure Port: {{ voyage.voyageDeparturePort }}</p>
+            <p>Arrival Port: {{ voyage.voyageArrivalPort }}</p>
+            <p>Start Date: {{ formatDate(voyage.voyageStart) }}</p>
+            <p>End Date: {{ formatDate(voyage.voyageEnd) }}</p>
+            <span class="add-edit-button">
+              <button (click)="openDeleteModal(
+                voyage)">Remove Voyage</button>
+              <button (click)="openModal(
+                voyage, 
+                getPortById(voyage.voyageDeparturePortId),
+                getPortById(voyage.voyageArrivalPortId) 
+                )">Edit Voyage</button>
+            </span>
+            <div class="horizontal-line"></div>
+          </ul>
+        <span class="add-edit-button add">
+          <button (click)="openAddModal()">Add a Voyage</button>
+        </span>
+      </div>
+    </ng-container>
+    </div>
+    <ng-template #noVoyages>
+      <p class="placeholder-data">There are no voyages available</p>
+      <span class="add-edit-button placeholder">
+        <button (click)="openAddModal()">Add a Voyage</button>
+      </span>
+    </ng-template>
+      <div class="voyages-header {{showPorts() ? 'expanded':''}}">
+        <h1>List of all the visited Ports</h1>
+        <button (click)="handleHidePorts()">
+          <span class="voyages-header-icon">&#9650;</span>
+        </button>
+      </div>
+      <div *ngIf="showPorts()" @fadeInDetails>
+        <ng-container *ngIf="(storedShip()?.listOfVoyages ?? []).length > 0; else noPorts">
+          <div *ngFor="let ports of storedShip()?.listOfPorts; let i = index">
+            <ul>
+              <li>Port {{ i + 1 }}:</li>
+              <p>Name: {{ ports.portName }}</p>
+              <p>Country: {{ ports.portCountry }}</p>
+              <div class="horizontal-line"></div>
+            </ul>
+          </div>
+        </ng-container>
+      </div>
+      <ng-template #noPorts>
+        <p class="placeholder-data">There are no ports available</p>
+      </ng-template>
+      <div class="voyages-header {{showCountries() ? 'expanded':''}}">
+        <h1>List of all the visited Countries</h1>
+        <button (click)="handleHideCountries()">
+          <span class="voyages-header-icon">&#9650;</span>
+        </button>
+      </div>
+      <h1 id="country-row">from the last year</h1>
+      <div *ngIf="showCountries()" @fadeInDetails>
+        <ng-container *ngIf="(storedShip()?.listOfVoyages ?? []).length > 0; else noCountries">
+          <div *ngFor="let contries of storedShip()?.listOfCountries; let i = index" class="country-items">
+            <ul>
+              <p> - {{contries.countryName}}</p>
+            </ul>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <ng-template #noCountries>
+      <p class="placeholder-data">There are no countries available</p>
+    </ng-template>
+    <app-delete-ship-modal 
+    [isVisible]="showDeleteShipModal()"
+    [ship]="storedShip()!"
+    (close)="closeDeleteShipModal()"
+    />
+    <app-delete-modal 
+      [isVisible]="showDeleteModal()"
+      [data]="selectedItem()"
+      (close)="closeDeleteModal()"
+    />
+    <app-modal [isVisible]="showModal()" 
+      [data]="selectedItem()" 
+      [departurePort]="selectedDeparturePort()" 
+      [arrivalPort]="selectedArrivalPort()" (close)="closeModal()"></app-modal>
+    <app-add-modal 
+      [isVisible]="showAddModal()"
+      [shipId]="storedShip()?.shipId || 0"
+      (close)="closeAddModal()"
+    />
